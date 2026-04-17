@@ -7,7 +7,7 @@ backend/.env.local
 backend/.env.*.local
 
 # Agent definitions
-agency-agents/
+.claude/
 
 # oh-my-codex runtime state
 .omx/
