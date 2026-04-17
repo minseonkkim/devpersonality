@@ -8,7 +8,5 @@ class Settings(BaseSettings):
     APP_PORT: int = 8000
     ALLOWED_ORIGINS: list[str] = ["http://localhost:3000"]
 
-    ANTHROPIC_API_KEY: str = ""
-
 
 settings = Settings()
