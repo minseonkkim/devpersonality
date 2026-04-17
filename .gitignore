@@ -8,3 +8,6 @@ backend/.env.*.local
 
 # Agent definitions
 agency-agents/
+
+# oh-my-codex runtime state
+.omx/
