@@ -8,5 +8,8 @@ class Settings(BaseSettings):
     APP_PORT: int = 8000
     ALLOWED_ORIGINS: list[str] = ["http://localhost:3000"]
 
+    GITHUB_CLIENT_ID: str = ""
+    GITHUB_CLIENT_SECRET: str = ""
+
 
 settings = Settings()
