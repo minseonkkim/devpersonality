@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import LogoIcon from "@/components/LogoIcon";
 
@@ -12,7 +12,7 @@ const STEPS = [
   { label: "완료",                    percent: 100 },
 ];
 
-export default function AnalyzePage() {
+function AnalyzeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams.get("job_id");
@@ -102,7 +102,6 @@ export default function AnalyzePage() {
             {step}
           </p>
 
-          {/* 픽셀 프로그레스 바 */}
           <div
             style={{
               display: "grid",
@@ -132,5 +131,13 @@ export default function AnalyzePage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function AnalyzePage() {
+  return (
+    <Suspense>
+      <AnalyzeContent />
+    </Suspense>
   );
 }
