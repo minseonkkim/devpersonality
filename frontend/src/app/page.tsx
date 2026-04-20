@@ -115,7 +115,7 @@ export default function LandingPage() {
         </div>
 
         {/* Type cards 4×2 grid */}
-        <div className="grid grid-cols-4 gap-3 w-full max-w-2xl">
+        <div className="grid grid-cols-2 gap-3 w-full max-w-2xl md:grid-cols-4">
           {TYPES.map((type) => (
             <TypeCard key={type.id} type={type} />
           ))}
