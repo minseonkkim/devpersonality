@@ -566,17 +566,20 @@ Upstash Redis (서버리스 Redis)
 
 **FastAPI (.env)**
 ```
+APP_ENV=development
+APP_PORT=8000
+ALLOWED_ORIGINS=["http://localhost:3000"]
+
 GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
-JWT_SECRET=
-REDIS_URL=
-FRONTEND_URL=https://dev-personality.com
 ```
 
-**Next.js (.env.local)**
+**Next.js (.env)**
 ```
-NEXT_PUBLIC_API_URL=https://api.dev-personality.com/v1
-NEXT_PUBLIC_SITE_URL=https://dev-personality.com
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+BACKEND_URL=http://localhost:8000
+
+GITHUB_CLIENT_ID=
 ```
 
 ---
