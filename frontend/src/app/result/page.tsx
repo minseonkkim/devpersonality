@@ -2,15 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const TYPE_META: Record<string, { label: string; color: string; desc: string; long: string }> = {
-  gardener:   { label: "꾸준형",  color: "#4CAF50", desc: "매일 물을 주듯 꾸준히", long: "작은 변화를 꾸준히 쌓아가는 스타일. 안정적인 리듬으로 프로젝트를 이끌어나갑니다." },
-  sprinter:   { label: "몰입형",  color: "#FF5722", desc: "한 번 달리면 멈추지 않아", long: "평소엔 조용하다가 특정 기간에 폭발적으로 집중하는 스타일." },
-  architect:  { label: "설계형",  color: "#3B5EDE", desc: "짓기 전에 먼저 그린다", long: "커밋 수는 적지만 한 번 올릴 때 구조적인 변화를 만드는 스타일." },
-  hacker:     { label: "실험형",  color: "#00C853", desc: "일단 해보고 생각한다", long: "빠르게 만들고 바로 시도해보는 스타일. 야간에 특히 활발합니다." },
-  researcher: { label: "탐구형",  color: "#009688", desc: "왜인지 알아야 직성이 풀려", long: "깊이 있게 탐구하고 분석하는 개발 스타일." },
-  craftsman:  { label: "장인형",  color: "#FF8F00", desc: "디테일에 영혼을 건다", long: "완성도를 최우선으로 생각하며 코드 퀄리티에 집착하는 스타일." },
-  explorer:   { label: "탐험형",  color: "#29B6F6", desc: "새로운 기술이 있다면 GO", long: "다양한 언어와 기술 스택을 탐험하는 것을 즐기는 스타일." },
-  builder:    { label: "빌더형",  color: "#E53935", desc: "만들고 배포하고 또 만든다", long: "레포를 꾸준히 만들고 배포하며 성장하는 스타일." },
+const TYPE_META: Record<string, { label: string; color: string; desc: string; long: string; hook: string }> = {
+  gardener:   { label: "꾸준형",  color: "#4CAF50", desc: "매일 물을 주듯 꾸준히",    hook: "잔디 비어있는 날,\n자기 전에 한 번 더 열어보죠?",                  long: "작은 변화를 꾸준히 쌓아가는 스타일. 안정적인 리듬으로 프로젝트를 이끌어나갑니다." },
+  sprinter:   { label: "몰입형",  color: "#FF5722", desc: "한 번 달리면 멈추지 않아", hook: "일주일 조용하다가 어느 날\n커밋 20개. 그게 바로 당신.",              long: "평소엔 조용하다가 특정 기간에 폭발적으로 집중하는 스타일." },
+  architect:  { label: "설계형",  color: "#3B5EDE", desc: "짓기 전에 먼저 그린다",    hook: "README부터 쓰고 코드는 나중에.\n다이어그램 없이는 못 시작하죠?",    long: "커밋 수는 적지만 한 번 올릴 때 구조적인 변화를 만드는 스타일." },
+  hacker:     { label: "실험형",  color: "#00C853", desc: "일단 해보고 생각한다",     hook: "새벽 2시에 'wip: 일단 돌아감' 커밋,\n한 번쯤 있죠?",               long: "빠르게 만들고 바로 시도해보는 스타일. 야간에 특히 활발합니다." },
+  researcher: { label: "탐구형",  color: "#009688", desc: "왜인지 알아야 직성이 풀려", hook: "라이브러리 쓰기 전에\n소스 코드 먼저 열어보는 사람.",               long: "깊이 있게 탐구하고 분석하는 개발 스타일." },
+  craftsman:  { label: "장인형",  color: "#FF8F00", desc: "디테일에 영혼을 건다",     hook: "변수명 하나 고치는 데 10분.\n남이 짠 코드 보면 손이 근질근질하죠?", long: "완성도를 최우선으로 생각하며 코드 퀄리티에 집착하는 스타일." },
+  explorer:   { label: "탐험형",  color: "#29B6F6", desc: "새로운 기술이 있다면 GO",  hook: "이번 달 또 새 언어 시작했죠?\n사이드 프로젝트 몇 개인지도 모르고.",  long: "다양한 언어와 기술 스택을 탐험하는 것을 즐기는 스타일." },
+  builder:    { label: "빌더형",  color: "#E53935", desc: "만들고 배포하고 또 만든다", hook: "아이디어 떠오르면 일단 레포부터 파는 사람.\n배포 안 하면 의미없죠.", long: "레포를 꾸준히 만들고 배포하며 성장하는 스타일." },
 };
 
 export default async function ResultPage({
@@ -88,6 +88,21 @@ export default async function ResultPage({
           >
             {meta.label}
           </span>
+          <p
+            className="text-center text-xs"
+            style={{
+              fontFamily: "var(--font-mono)",
+              color: meta.color,
+              background: `${meta.color}0d`,
+              border: `1px solid ${meta.color}33`,
+              padding: "10px 16px",
+              lineHeight: "1.7",
+              width: "100%",
+              whiteSpace: "pre-line",
+            }}
+          >
+            &ldquo;{meta.hook}&rdquo;
+          </p>
           <p className="text-center text-sm" style={{ color: "#8b949e", lineHeight: "1.8" }}>
             {meta.long}
           </p>

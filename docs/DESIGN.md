@@ -254,6 +254,22 @@ hover     : border-color #58a6ff
 블록 단위로 채워지는 진행 바 (8px 블록 + 1px gap)
 ```
 
+### 훅 카피 (HookQuote)
+
+결과 카드 내 유형 뱃지 아래, 설명 텍스트 위에 배치하는 공감 한 줄 문구.
+
+```
+배경      : TYPE_COLOR + "0d"   (5% opacity)
+테두리    : 1px solid TYPE_COLOR + "33"  (20% opacity)
+텍스트    : TYPE_COLOR
+폰트      : Geist Mono, 12px
+패딩      : 10px 16px
+정렬      : center
+형식      : ❝ ... ❞  (typographic quotes)
+```
+
+각 유형별 훅 카피는 `TYPE_META[type].hook`에 정의. 사용자가 "맞다!" 하고 공감할 수 있는 개발 습관 묘사.
+
 ### 점수 레이더 차트
 
 - 일반 curved 레이더 대신 **각진 폴리곤** 사용 (pixel-friendly)
@@ -295,20 +311,18 @@ hover     : border-color #58a6ff
 ┌─────────────────────────────────────┐
 │                                     │
 │  ┌──────────────────────────────┐   │
-│  │  [스프라이트 192px]           │   │  메인 결과 카드
-│  │  유형명 (Press Start 2P)     │   │  border: TYPE_COLOR
-│  │  한 줄 설명                  │   │  glow: TYPE_COLOR
-│  │  신뢰도: ██████░░░ 72%       │   │
+│  │  [스프라이트 96px]            │   │  메인 결과 카드
+│  │  유형 뱃지 (Geist Mono)      │   │  border: TYPE_COLOR
+│  │  ❝ 훅 카피 (공감 한 줄) ❞    │   │  bg: TYPE_COLOR 5%
+│  │  긴 설명 (#8b949e)           │   │  glow: TYPE_COLOR
 │  └──────────────────────────────┘   │
 │                                     │
 │  [성향 스펙트럼 — 4개 축]             │  MBTI 스타일 바
-│  꾸준함 ████░░░░░░ 몰아치기          │
-│  정밀   ███░░░░░░░ 대담              │
-│                                     │
-│  [8개 유형 점수 - 각진 레이더]        │
+│  꾸준함 ████░░░░░░ 몰아치기          │  우세한 쪽에서 채워짐
+│  정밀   ███░░░░░░░ 대담              │  퍼센트 표시
 │                                     │
 │  [공유 패널]                         │
-│  ■ 배지 복사  □ 트위터  □ URL 복사  │
+│  □ X에 공유하기  □ 다시 분석하기     │
 │                                     │
 └─────────────────────────────────────┘
 ```
@@ -337,6 +351,7 @@ hover     : border-color #58a6ff
 |------|------|------|
 | 결과 카드 진입 | 아래에서 올라오며 등장 | `translateY(16px) → 0`, 300ms ease-out |
 | 스프라이트 등장 | 위에서 바운스 | `translateY(-8px) → 0`, steps(4), 200ms |
+| 스프라이트 아이들 | 위아래 플로팅 | `translateY(0) ↔ translateY(-6px)`, 2s ease-in-out infinite (`animate-float`) |
 | 버튼 클릭 | 픽셀 눌림 | `translateY(0) → translateY(2px)`, 즉시 |
 | 점수 바 채움 | 블록 단위 채워짐 | `width: 0 → N%`, steps(8), 800ms delay |
 | 타이핑 텍스트 | 커서 깜빡이며 한 글자씩 | CSS animation, steps(1) |
