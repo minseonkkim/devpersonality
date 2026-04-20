@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LogoIcon from "@/components/LogoIcon";
 
 const TYPES = [
   { id: "gardener",   label: "꾸준형", color: "#4CAF50", desc: "매일 물을 주듯 꾸준히" },
@@ -20,10 +21,7 @@ export default function LandingPage() {
         style={{ borderBottom: "1px solid #30363d" }}
       >
         <div className="flex items-center gap-3">
-          <div
-            className="w-5 h-5"
-            style={{ background: "#58a6ff", boxShadow: "2px 2px 0px #000" }}
-          />
+          <LogoIcon />
           <span
             className="text-xs"
             style={{ fontFamily: "var(--font-press-start)", color: "#e6edf3" }}

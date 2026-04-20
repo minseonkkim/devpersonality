@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import LogoIcon from "@/components/LogoIcon";
 import { redirect } from "next/navigation";
 
 const TYPE_META: Record<string, { label: string; color: string; desc: string; long: string; hook: string }> = {
@@ -33,7 +34,7 @@ export default async function ResultPage({
         style={{ borderBottom: "1px solid #30363d" }}
       >
         <Link href="/" className="flex items-center gap-3" style={{ textDecoration: "none" }}>
-          <div className="w-5 h-5" style={{ background: "#58a6ff", boxShadow: "2px 2px 0px #000" }} />
+          <LogoIcon />
           <span className="text-xs" style={{ fontFamily: "var(--font-press-start)", color: "#e6edf3" }}>
             Dev Personality
           </span>
