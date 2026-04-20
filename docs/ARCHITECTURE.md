@@ -167,11 +167,11 @@ GET /analyze/{username}?period=30
     "description": "작은 변화를 꾸준히 쌓아가는 개발 스타일입니다."
   },
   "secondary_type": null,
-  "evidence": [
-    { "label": "최근 30일 중 활동일", "value": "22일" },
-    { "label": "평균 커밋 크기", "value": "38라인" },
-    { "label": "유지보수 커밋 비율", "value": "64%" },
-    { "label": "야간 커밋 비율", "value": "12%" }
+  "axes": [
+    { "left": "꾸준함", "right": "몰아치기", "score": 22 },
+    { "left": "정밀",   "right": "대담",     "score": 35 },
+    { "left": "전문",   "right": "탐험",     "score": 41 },
+    { "left": "주간",   "right": "야간",     "score": 12 }
   ],
   "scores": {
     "gardener": 72,
@@ -385,7 +385,7 @@ src/
 ├── components/
 │   ├── result/
 │   │   ├── PersonalityCard.tsx   # 메인 결과 카드 (유형 + 확률)
-│   │   ├── EvidenceList.tsx      # AI 분석 근거 리스트
+│   │   ├── SpectrumAxes.tsx      # 4개 축 MBTI 스타일 스펙트럼 바
 │   │   ├── ScoreRadar.tsx        # 8개 유형 점수 레이더 차트
 │   │   └── SharePanel.tsx        # 배지/SNS/URL 공유 패널
 │   ├── analyze/
@@ -442,7 +442,7 @@ src/
 
 #### `/result/[username]` 결과 페이지
 - `PersonalityCard` — 유형명 + 확률 + 한 줄 설명
-- `EvidenceList` — AI 분석 근거 3~4개
+- `SpectrumAxes` — 4개 축 스펙트럼 바 (꾸준함↔몰아치기, 정밀↔대담, 전문↔탐험, 주간↔야간)
 - `ScoreRadar` — 8개 유형 점수 레이더
 - `SharePanel` — 배지 코드 / 트위터 / 링크드인 / URL 복사
 
@@ -479,9 +479,10 @@ interface PersonalityType {
   description: string;
 }
 
-interface Evidence {
-  label: string;
-  value: string;
+interface SpectrumAxis {
+  left: string;   // 왼쪽 극단 레이블
+  right: string;  // 오른쪽 극단 레이블
+  score: number;  // 0(왼쪽) ~ 100(오른쪽)
 }
 
 interface AnalysisResult {
@@ -490,7 +491,7 @@ interface AnalysisResult {
   analyzed_at: string;
   primary_type: PersonalityType;
   secondary_type: PersonalityType | null;
-  evidence: Evidence[];
+  axes: SpectrumAxis[];
   scores: Record<PersonalityTypeId, number>;
 }
 

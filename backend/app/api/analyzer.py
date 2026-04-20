@@ -81,3 +81,37 @@ def score(signals: dict) -> dict[str, float]:
 
 def determine_type(scores: dict[str, float]) -> str:
     return max(scores, key=lambda t: scores[t])
+
+
+def generate_axes(signals: dict) -> list[dict]:
+    """4개 축 스펙트럼 점수 생성. score 0=왼쪽 극단, 100=오른쪽 극단."""
+    active_days     = signals["active_days"]
+    total_commits   = signals["total_commits"]
+    night_ratio     = signals["night_ratio"]
+    avg_commit_size = signals["avg_commit_size"]
+    lang_count      = signals["lang_count"]
+    fork_ratio      = signals["fork_ratio"]
+
+    # 1. 리듬 — 꾸준함(0) ↔ 몰아치기(100)
+    steady   = min(active_days / 20, 1.0)
+    burst    = min((total_commits / max(active_days, 1)) / 8, 1.0)
+    rhythm   = int((1 - steady) * 55 + burst * 45)
+
+    # 2. 커밋 규모 — 정밀(0) ↔ 대담(100)
+    if avg_commit_size > 0:
+        scale = int(min(avg_commit_size / 200, 1.0) * 100)
+    else:
+        scale = 50  # 데이터 없으면 중립
+
+    # 3. 탐험 성향 — 전문(0) ↔ 탐험(100)
+    explore = int((min(lang_count / 6, 1.0) * 0.6 + fork_ratio * 0.4) * 100)
+
+    # 4. 활동 시간 — 주간(0) ↔ 야간(100)
+    timing = int(night_ratio * 100)
+
+    return [
+        {"left": "꾸준함", "right": "몰아치기", "score": rhythm},
+        {"left": "정밀",   "right": "대담",     "score": scale},
+        {"left": "전문",   "right": "탐험",     "score": explore},
+        {"left": "주간",   "right": "야간",     "score": timing},
+    ]

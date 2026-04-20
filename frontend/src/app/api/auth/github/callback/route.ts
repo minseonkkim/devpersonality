@@ -25,6 +25,7 @@ export async function GET(request: NextRequest) {
     username: data.username,
     avatar_url: data.avatar_url,
     scores: JSON.stringify(data.scores),
+    axes: JSON.stringify(data.axes ?? []),
   });
 
   return NextResponse.redirect(new URL(`/result?${params}`, request.url));

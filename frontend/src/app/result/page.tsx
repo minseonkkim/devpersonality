@@ -18,10 +18,13 @@ export default async function ResultPage({
 }: {
   searchParams: Promise<Record<string, string>>;
 }) {
-  const { type, username, avatar_url } = await searchParams;
+  const { type, username, avatar_url, axes: axesRaw } = await searchParams;
   if (!type || !TYPE_META[type]) redirect("/");
 
   const meta = TYPE_META[type];
+  const axes: { left: string; right: string; score: number }[] = (() => {
+    try { return JSON.parse(axesRaw ?? "[]"); } catch { return []; }
+  })();
 
   return (
     <div className="flex flex-col min-h-screen" style={{ background: "#0d1117" }}>
@@ -89,6 +92,75 @@ export default async function ResultPage({
             {meta.long}
           </p>
         </div>
+
+        {axes.length > 0 && (
+          <div
+            className="w-full max-w-md"
+            style={{ background: "#161b22", border: "1px solid #30363d" }}
+          >
+            <div style={{ padding: "8px 16px", borderBottom: "1px solid #30363d" }}>
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#484f58" }}>
+                // 성향 스펙트럼
+              </span>
+            </div>
+            <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "20px" }}>
+              {axes.map((axis) => {
+                const leftWins = axis.score <= 50;
+                // 우세한 쪽 비율: 항상 50~100%
+                const dominantPct = leftWins ? 100 - axis.score : axis.score;
+                // 바 채움 너비: 우세한 쪽에서 시작
+                const fillWidth = `${dominantPct}%`;
+
+                return (
+                  <div key={axis.left} style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                    {/* 레이블 */}
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "12px",
+                        color: leftWins ? meta.color : "#484f58",
+                        fontWeight: leftWins ? "700" : "400",
+                      }}>
+                        {axis.left}
+                      </span>
+                      <span style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "12px",
+                        color: !leftWins ? meta.color : "#484f58",
+                        fontWeight: !leftWins ? "700" : "400",
+                      }}>
+                        {axis.right}
+                      </span>
+                    </div>
+
+                    {/* 바: 우세한 쪽에서 채워짐 */}
+                    <div style={{ height: "10px", background: "#21262d", position: "relative" }}>
+                      <div style={{
+                        position: "absolute",
+                        top: 0,
+                        [leftWins ? "left" : "right"]: 0,
+                        height: "100%",
+                        width: fillWidth,
+                        background: meta.color,
+                      }} />
+                    </div>
+
+                    {/* 퍼센트: 우세한 쪽 정렬 */}
+                    <div style={{ display: "flex", justifyContent: leftWins ? "flex-start" : "flex-end" }}>
+                      <span style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "10px",
+                        color: meta.color,
+                      }}>
+                        {dominantPct}%
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         <div className="flex gap-4">
           <a

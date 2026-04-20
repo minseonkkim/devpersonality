@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 from app.core.config import settings
 from app.api.github_service import exchange_code_for_token, fetch_github_data, extract_signals
-from app.api.analyzer import score, determine_type
+from app.api.analyzer import score, determine_type, generate_axes
 
 router = APIRouter()
 
@@ -33,6 +33,7 @@ async def analyze(req: AnalyzeRequest):
     signals = extract_signals(data)
     scores = score(signals)
     personality_type = determine_type(scores)
+    axes = generate_axes(signals)
 
     user = data["user"]
     return {
@@ -40,4 +41,5 @@ async def analyze(req: AnalyzeRequest):
         "username": user.get("login", ""),
         "avatar_url": user.get("avatar_url", ""),
         "scores": scores,
+        "axes": axes,
     }
