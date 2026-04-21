@@ -67,3 +67,11 @@ async def analyze_status(job_id: str):
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
     return job
+
+
+@router.get("/analyze/result/{username}")
+async def analyze_result(username: str):
+    result = job_store.get_by_username(username)
+    if not result:
+        raise HTTPException(status_code=404, detail="Result not found")
+    return result

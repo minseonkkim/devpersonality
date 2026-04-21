@@ -42,14 +42,7 @@ function AnalyzeContent() {
         if (data.status === "completed" && data.result) {
           clearInterval(intervalRef.current!);
           const r = data.result;
-          const params = new URLSearchParams({
-            type: r.type,
-            username: r.username,
-            avatar_url: r.avatar_url,
-            scores: JSON.stringify(r.scores),
-            axes: JSON.stringify(r.axes ?? []),
-          });
-          router.replace(`/result?${params}`);
+          router.replace(`/result/${r.username}`);
         } else if (data.status === "failed") {
           clearInterval(intervalRef.current!);
           setFailed(true);

@@ -1,7 +1,7 @@
-import uuid
 from typing import Any
 
 _jobs: dict[str, dict] = {}
+_results: dict[str, dict] = {}  # username → latest result
 
 
 def create(job_id: str) -> None:
@@ -29,6 +29,13 @@ def complete(job_id: str, result: dict[str, Any]) -> None:
         _jobs[job_id]["status"] = "completed"
         _jobs[job_id]["progress"] = {"step": "완료", "percent": 100}
         _jobs[job_id]["result"] = result
+        username = result.get("username")
+        if username:
+            _results[username] = result
+
+
+def get_by_username(username: str) -> dict | None:
+    return _results.get(username)
 
 
 def fail(job_id: str, error: str) -> None:

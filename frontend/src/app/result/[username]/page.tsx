@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LogoIcon from "@/components/LogoIcon";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 const COMPATIBILITY: Record<string, { good: string; goodReason: string; bad: string; badReason: string }> = {
   gardener:   { good: "craftsman",  goodReason: "같이 리뷰하면 PR이 조용히 머지된다. 둘 다 급하지 않다.",        bad: "sprinter",   badReason: "한 명은 매일 조금씩, 한 명은 마감 전날 올인. PR 타이밍이 안 맞는다." },
@@ -25,18 +25,32 @@ const TYPE_META: Record<string, { label: string; color: string; desc: string; lo
   builder:    { label: "빌더형",  color: "#E53935", desc: "만들고 배포하고 또 만든다", hook: "아이디어 떠오르면 일단 레포부터 파는 사람.\n배포 안 하면 의미없죠.", long: "아이디어 떠오르면 그날 레포 팝니다. 기획서보다 README가 먼저고, 배포 안 한 건 만든 게 아닙니다.\n\n완벽해질 때까지 기다리면 영원히 못 냅니다. 일단 세상에 꺼내놓고, 망하면 배우고, 되면 발전시키면 됩니다. 개발자이기 전에 뭔가를 계속 만들어야 직성이 풀리는 사람 — 메이커에 가깝습니다." },
 };
 
-export default async function ResultPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string>>;
-}) {
-  const { type, username, avatar_url, axes: axesRaw } = await searchParams;
-  if (!type || !TYPE_META[type]) redirect("/");
+async function fetchResult(username: string) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api/analyze/result/${username}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  return res.json() as Promise<{
+    type: string;
+    username: string;
+    avatar_url: string;
+    scores: Record<string, number>;
+    axes: { left: string; right: string; score: number }[];
+  }>;
+}
 
+export default async function ResultPage({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
+  const data = await fetchResult(username);
+  if (!data || !TYPE_META[data.type]) notFound();
+
+  const { type, avatar_url, axes } = data;
   const meta = TYPE_META[type];
-  const axes: { left: string; right: string; score: number }[] = (() => {
-    try { return JSON.parse(axesRaw ?? "[]"); } catch { return []; }
-  })();
 
   return (
     <div className="flex flex-col min-h-screen" style={{ background: "#0d1117" }}>
@@ -61,7 +75,7 @@ export default async function ResultPage({
           {avatar_url && (
             <Image
               src={avatar_url}
-              alt={username ?? "avatar"}
+              alt={username}
               width={64}
               height={64}
               className="rounded-full"
@@ -133,14 +147,10 @@ export default async function ResultPage({
             <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "20px" }}>
               {axes.map((axis) => {
                 const leftWins = axis.score <= 50;
-                // 우세한 쪽 비율: 항상 50~100%
                 const dominantPct = leftWins ? 100 - axis.score : axis.score;
-                // 바 채움 너비: 우세한 쪽에서 시작
-                const fillWidth = `${dominantPct}%`;
 
                 return (
                   <div key={axis.left} style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                    {/* 레이블 */}
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                       <span style={{
                         fontFamily: "var(--font-mono)",
@@ -159,26 +169,18 @@ export default async function ResultPage({
                         {axis.right}
                       </span>
                     </div>
-
-                    {/* 바: 우세한 쪽에서 채워짐 */}
                     <div style={{ height: "10px", background: "#21262d", position: "relative" }}>
                       <div style={{
                         position: "absolute",
                         top: 0,
                         [leftWins ? "left" : "right"]: 0,
                         height: "100%",
-                        width: fillWidth,
+                        width: `${dominantPct}%`,
                         background: meta.color,
                       }} />
                     </div>
-
-                    {/* 퍼센트: 우세한 쪽 정렬 */}
                     <div style={{ display: "flex", justifyContent: leftWins ? "flex-start" : "flex-end" }}>
-                      <span style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "10px",
-                        color: meta.color,
-                      }}>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: meta.color }}>
                         {dominantPct}%
                       </span>
                     </div>
