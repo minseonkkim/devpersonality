@@ -3,6 +3,17 @@ import Link from "next/link";
 import LogoIcon from "@/components/LogoIcon";
 import { redirect } from "next/navigation";
 
+const COMPATIBILITY: Record<string, { good: string; goodReason: string; bad: string; badReason: string }> = {
+  gardener:   { good: "craftsman",  goodReason: "같이 리뷰하면 PR이 조용히 머지된다. 둘 다 급하지 않다.",        bad: "sprinter",   badReason: "한 명은 매일 조금씩, 한 명은 마감 전날 올인. PR 타이밍이 안 맞는다." },
+  sprinter:   { good: "hacker",     goodReason: "마감 전날 둘이 붙으면 밤새 기능이 완성된다.",                  bad: "researcher", badReason: "데드라인 얘기 꺼내면 '근데 이 라이브러리 내부 동작이...' 시작된다." },
+  architect:  { good: "researcher", goodReason: "설계 문서가 나오면 둘 다 읽는다. 회의가 짧아진다.",            bad: "hacker",     badReason: "설계 리뷰 잡았더니 상대방이 이미 구현 다 해놓음." },
+  hacker:     { good: "explorer",   goodReason: "기술 도입 결정이 회의 없이 이뤄진다. 그냥 해보고 공유.",       bad: "craftsman",  badReason: "PR 올리면 댓글이 30개. 변수명부터 시작해서 끝이 없다." },
+  researcher: { good: "architect",  goodReason: "코드 리뷰에서 '왜 이렇게 짰어요?'가 없다. 이미 다 알고 짠다.", bad: "builder",    badReason: "스펙 논의 중인데 상대방이 배포 완료 슬랙 올림." },
+  craftsman:  { good: "architect",  goodReason: "레거시가 안 생긴다. 둘 다 나중에 건드리기 싫어서 처음부터 잘 짠다.", bad: "hacker", badReason: "코드 리뷰에서 합의점을 못 찾는다. 기준이 아예 다르다." },
+  explorer:   { good: "hacker",     goodReason: "기술 스택 논의가 5분 만에 끝난다. 둘 다 일단 써보자.",        bad: "gardener",   badReason: "이번 달 스택 또 바꾸자고 했더니 조용히 거절당함." },
+  builder:    { good: "sprinter",   goodReason: "스프린트 마지막 날이 제일 재밌다. 같이 있으면 뭔가 나온다.",   bad: "architect",  badReason: "출시 일정 잡으면 설계가 아직이라고 한다." },
+};
+
 const TYPE_META: Record<string, { label: string; color: string; desc: string; long: string; hook: string }> = {
   gardener:   { label: "꾸준형",  color: "#4CAF50", desc: "매일 물을 주듯 꾸준히",    hook: "잔디 비어있는 날,\n자기 전에 한 번 더 열어보죠?",                  long: "잔디 하나 비는 게 그냥 넘어가지지 않는 사람입니다. 아, 오늘 커밋 안 했네 — 하고 자기 전에 노트북 다시 여는 그 사람.\n\n드라마틱한 성격은 아닌데, 그게 오히려 강점입니다. 폭발하지 않는 대신 꺼지지도 않거든요. 요란하지 않아도 결국 가장 멀리 가는 타입입니다." },
   sprinter:   { label: "몰입형",  color: "#FF5722", desc: "한 번 달리면 멈추지 않아", hook: "일주일 조용하다가 어느 날\n커밋 20개. 그게 바로 당신.",              long: "평소엔 멀쩡한 사람인데 갑자기 사라집니다. 며칠 후 커밋 20개와 함께 귀환.\n\n에너지가 전부 아니면 제로입니다. 관심 없을 땐 아무것도 안 하다가, 꽂히면 밥도 잊고 화장실도 참습니다. 그 집중력이 폭발하는 순간만큼은 아무도 못 따라옵니다. 데드라인이 최고의 연료입니다." },
@@ -177,6 +188,61 @@ export default async function ResultPage({
             </div>
           </div>
         )}
+
+        {(() => {
+          const compat = COMPATIBILITY[type];
+          if (!compat) return null;
+          const rows = [
+            { key: compat.good, typeMeta: TYPE_META[compat.good], reason: compat.goodReason, sign: "+", signColor: "#3fb950", label: "같이 일하면 잘 맞는 유형" },
+            { key: compat.bad,  typeMeta: TYPE_META[compat.bad],  reason: compat.badReason,  sign: "-", signColor: "#f85149", label: "같이 일하면 힘든 유형" },
+          ];
+          return (
+            <div
+              className="w-full max-w-md"
+              style={{ background: "#161b22", border: "1px solid #30363d" }}
+            >
+              <div style={{ padding: "8px 16px", borderBottom: "1px solid #30363d" }}>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#484f58" }}>
+                  // 협업 궁합
+                </span>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {rows.map(({ key, typeMeta, reason, sign, signColor, label }, i) => (
+                  <div
+                    key={key}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "16px",
+                      padding: "16px 20px",
+                      borderBottom: i === 0 ? "1px solid #21262d" : "none",
+                    }}
+                  >
+                    <Image
+                      src={`/sprites/${key}.png`}
+                      alt={typeMeta.label}
+                      width={48}
+                      height={48}
+                      style={{ imageRendering: "pixelated", flexShrink: 0 }}
+                      unoptimized
+                    />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: 0 }}>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#484f58" }}>
+                        <span style={{ color: signColor }}>{sign}</span> {label}
+                      </span>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: typeMeta.color, fontWeight: "700" }}>
+                        {typeMeta.label}
+                      </span>
+                      <p style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#8b949e", lineHeight: "1.6", margin: 0 }}>
+                        {reason}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         <div className="flex gap-4">
           <a
