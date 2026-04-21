@@ -444,7 +444,7 @@ src/
 - `PersonalityCard` — 유형명 + 확률 + 한 줄 설명
 - `SpectrumAxes` — 4개 축 스펙트럼 바 (꾸준함↔몰아치기, 정밀↔대담, 전문↔탐험, 주간↔야간)
 - `ScoreRadar` — 8개 유형 점수 레이더
-- `SharePanel` — 배지 코드 / 트위터 / 링크드인 / URL 복사
+- `SharePanel` — 배지 코드 / 트위터 / 링크드인 / URL 공유
 
 #### `/badge/[username]` 배지 페이지
 - 배지 미리보기 (SVG 렌더링)

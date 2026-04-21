@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LogoIcon from "@/components/LogoIcon";
+import { ShareUrlButton } from "@/components/ShareUrlButton";
 import { notFound } from "next/navigation";
 
 const COMPATIBILITY: Record<string, { good: string; goodReason: string; bad: string; badReason: string }> = {
@@ -246,34 +247,40 @@ export default async function ResultPage({
           );
         })()}
 
-        <div className="flex gap-4">
-          <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`나의 개발자 유형은 "${meta.label}" — ${meta.desc}\n\n#DevPersonality #GitHub`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-3 text-xs"
-            style={{
-              background: "#1d9bf0",
-              color: "#fff",
-              fontFamily: "var(--font-mono)",
-              boxShadow: "3px 3px 0px #000",
-              textDecoration: "none",
-            }}
-          >
-            X에 공유하기
-          </a>
+        <div className="flex flex-col items-center gap-3">
+          <div className="flex gap-3">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`나의 개발자 유형은 "${meta.label}" — ${meta.desc}\n\n#DevPersonality #GitHub`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-3 text-xs"
+              style={{
+                background: "#1d9bf0",
+                color: "#fff",
+                fontFamily: "var(--font-mono)",
+                boxShadow: "3px 3px 0px #000",
+                textDecoration: "none",
+              }}
+            >
+              X에 공유하기
+            </a>
+            <ShareUrlButton
+              url={`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/result/${username}`}
+            />
+          </div>
           <Link
             href="/"
-            className="px-5 py-3 text-xs"
+            className="text-xs"
             style={{
-              background: "#161b22",
-              color: "#8b949e",
-              border: "1px solid #30363d",
+              color: "#484f58",
               fontFamily: "var(--font-mono)",
               textDecoration: "none",
+              borderBottom: "1px solid #484f58",
+              paddingBottom: "1px",
+              marginTop: "8px",
             }}
           >
-            다시 분석하기
+            ↩ 다시 분석하기
           </Link>
         </div>
       </main>
