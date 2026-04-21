@@ -351,7 +351,7 @@ CREATE INDEX idx_analysis_type ON analysis_results(primary_type);
 CREATE TABLE share_events (
   id          BIGSERIAL PRIMARY KEY,
   username    VARCHAR(39) NOT NULL,
-  channel     VARCHAR(20) NOT NULL,  -- 'badge' | 'twitter' | 'linkedin' | 'url'
+  channel     VARCHAR(20) NOT NULL,  -- 'badge' | 'image' | 'url'
   created_at  TIMESTAMPTZ DEFAULT NOW()
 );
 ```
@@ -444,7 +444,8 @@ src/
 - `PersonalityCard` — 유형명 + 확률 + 한 줄 설명
 - `SpectrumAxes` — 4개 축 스펙트럼 바 (꾸준함↔몰아치기, 정밀↔대담, 전문↔탐험, 주간↔야간)
 - `ScoreRadar` — 8개 유형 점수 레이더
-- `SharePanel` — 배지 코드 / 트위터 / 링크드인 / URL 공유
+- `SaveImageButton` — Canvas로 1080×1920 PNG 생성 후 다운로드
+- `ShareUrlButton` — URL 클립보드 복사
 
 #### `/badge/[username]` 배지 페이지
 - 배지 미리보기 (SVG 렌더링)

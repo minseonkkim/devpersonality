@@ -12,11 +12,11 @@
 3. [개발자 성향 유형](#3-개발자-성향-유형-8가지)
 4. [유형별 캐릭터 디자인](#35-유형별-캐릭터-디자인)
 5. [분석 로직](#4-분석-로직)
-5. [결과 출력 구조](#5-결과-출력-구조)
-6. [사용자 경험 흐름](#6-사용자-경험-흐름)
-7. [차별화 포인트](#7-차별화-포인트)
-8. [개발 로드맵](#8-개발-로드맵)
-9. [기술 스택](#9-기술-스택)
+6. [결과 출력 구조](#5-결과-출력-구조)
+7. [사용자 경험 흐름](#6-사용자-경험-흐름)
+8. [차별화 포인트](#7-차별화-포인트)
+9. [개발 로드맵](#8-개발-로드맵)
+10. [기술 스택](#9-기술-스택)
 
 ---
 
@@ -165,12 +165,12 @@ GitHub 활동 패턴(커밋 빈도, 시간대, 언어 분포, 기여 규모)을 
 
 ### 캐릭터 공통 가이드
 
-| 항목 | 방향 |
-| ---- | ---- |
-| 스타일 | 픽셀 아트 |
-| 형태 | 개발자 느낌의 캐릭터 (사람형 or 마스코트) |
-| 표현 | 포즈 + 소품으로 유형 성향 시각화 |
-| 컬러 | 유형별 대표 색상 지정 |
+| 항목   | 방향                                      |
+| ------ | ----------------------------------------- |
+| 스타일 | 픽셀 아트                                 |
+| 형태   | 개발자 느낌의 캐릭터 (사람형 or 마스코트) |
+| 표현   | 포즈 + 소품으로 유형 성향 시각화          |
+| 컬러   | 유형별 대표 색상 지정                     |
 
 ---
 
@@ -292,14 +292,14 @@ GitHub 활동 패턴(커밋 빈도, 시간대, 언어 분포, 기여 규모)을 
 
 ```ts
 const COMPATIBILITY: Record<string, { good: string; bad: string }> = {
-  gardener:   { good: "craftsman", bad: "sprinter" },   // 묵묵히 퀄리티 vs 리듬 불일치
-  sprinter:   { good: "hacker",    bad: "researcher" }, // 둘 다 먼저 돌진 vs 원리 파는 동안 배포
-  architect:  { good: "researcher", bad: "hacker" },    // 깊이 이해 후 행동 vs 다이어그램 없이 누름
-  hacker:     { good: "explorer",  bad: "craftsman" },  // 새 영역 탐험 vs 완벽주의 충돌
-  researcher: { good: "architect", bad: "builder" },    // 이해→설계→실행 vs 일단 배포
-  craftsman:  { good: "architect", bad: "hacker" },     // 구조+디테일 vs 코드 리뷰 전쟁
-  explorer:   { good: "hacker",    bad: "gardener" },   // 신기술 PoC 최강 vs 한 우물 충돌
-  builder:    { good: "sprinter",  bad: "architect" },  // 폭발적 생산성 vs 설계 끝날 때까지 대기
+  gardener: { good: "craftsman", bad: "sprinter" }, // 묵묵히 퀄리티 vs 리듬 불일치
+  sprinter: { good: "hacker", bad: "researcher" }, // 둘 다 먼저 돌진 vs 원리 파는 동안 배포
+  architect: { good: "researcher", bad: "hacker" }, // 깊이 이해 후 행동 vs 다이어그램 없이 누름
+  hacker: { good: "explorer", bad: "craftsman" }, // 새 영역 탐험 vs 완벽주의 충돌
+  researcher: { good: "architect", bad: "builder" }, // 이해→설계→실행 vs 일단 배포
+  craftsman: { good: "architect", bad: "hacker" }, // 구조+디테일 vs 코드 리뷰 전쟁
+  explorer: { good: "hacker", bad: "gardener" }, // 신기술 PoC 최강 vs 한 우물 충돌
+  builder: { good: "sprinter", bad: "architect" }, // 폭발적 생산성 vs 설계 끝날 때까지 대기
 };
 ```
 
@@ -329,9 +329,9 @@ const COMPATIBILITY: Record<string, { good: string; bad: string }> = {
 
 출력 예시: `꾸준형 🌱 | Gardener`
 
-### SNS 공유 카드
+### 이미지 저장
 
-OG 이미지로 자동 생성. 유형명 + 이모지 + 한 줄 설명 포함. 트위터/링크드인 공유 최적화.
+Canvas API로 1080×1920 PNG 생성. 유형명 + 스프라이트 + 훅 문구 + 설명 포함. 이미지로 저장하기 버튼으로 로컬 다운로드.
 
 ---
 
@@ -349,19 +349,19 @@ GitHub 로그인 (OAuth)
     ↓
 결과 출력 (유형 + 근거)
     ↓
-공유 (배지 / SNS 카드 / URL)
+공유 (이미지 저장 / URL 복사)
 ```
 
 ---
 
 ## 7. 차별화 포인트
 
-| 포인트            | 설명                                                        |
-| ----------------- | ----------------------------------------------------------- |
+| 포인트            | 설명                                                         |
+| ----------------- | ------------------------------------------------------------ |
 | 🎯 근거 기반 결과 | 결과에 스코어링 근거 3~4개 표시 → "왜 이 유형인지" 납득 가능 |
-| 📊 확률 표현      | "72% 확률로 꾸준형" → 단정 대신 추정치로 거부감 최소화      |
-| 🔖 README 배지    | shields.io 스타일 배지로 GitHub 프로필에 삽입 → 자연 바이럴 |
-| 🌐 한/영 병기     | "꾸준형 🌱 Gardener" — 국내외 모두 공유 가능한 이름 체계    |
+| 📊 확률 표현      | "72% 확률로 꾸준형" → 단정 대신 추정치로 거부감 최소화       |
+| 🔖 README 배지    | shields.io 스타일 배지로 GitHub 프로필에 삽입 → 자연 바이럴  |
+| 🌐 한/영 병기     | "꾸준형 🌱 Gardener" — 국내외 모두 공유 가능한 이름 체계     |
 
 ---
 
@@ -378,7 +378,7 @@ GitHub 로그인 (OAuth)
 
 - [ ] 전체 8개 유형
 - [ ] README 배지 생성기
-- [ ] SNS 공유 카드 (OG 이미지)
+- [ ] 이미지로 저장하기 (Canvas → PNG 다운로드)
 - [ ] 분석 기간 선택 옵션
 
 ### Phase 3 · 확장 (7주~)
@@ -392,12 +392,12 @@ GitHub 로그인 (OAuth)
 
 ## 9. 기술 스택
 
-| 영역       | 기술                                   |
-| ---------- | -------------------------------------- |
-| 프론트엔드 | Next.js, Tailwind CSS, Framer Motion   |
-| 백엔드     | FastAPI, GitHub REST API, Redis        |
-| 분석       | 규칙 기반 스코어링 (Python)            |
-| 배지 생성  | Sharp, shields.io 호환 포맷            |
+| 영역       | 기술                                 |
+| ---------- | ------------------------------------ |
+| 프론트엔드 | Next.js, Tailwind CSS, Framer Motion |
+| 백엔드     | FastAPI, GitHub REST API, Redis      |
+| 분석       | 규칙 기반 스코어링 (Python)          |
+| 배지 생성  | Sharp, shields.io 호환 포맷          |
 
 ---
 

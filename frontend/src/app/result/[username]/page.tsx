@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoIcon from "@/components/LogoIcon";
 import { ShareUrlButton } from "@/components/ShareUrlButton";
+import { SaveImageButton } from "@/components/SaveImageButton";
 import { notFound } from "next/navigation";
 
 const COMPATIBILITY: Record<string, { good: string; goodReason: string; bad: string; badReason: string }> = {
@@ -249,21 +250,15 @@ export default async function ResultPage({
 
         <div className="flex flex-col items-center gap-3">
           <div className="flex gap-3">
-            <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`나의 개발자 유형은 "${meta.label}" — ${meta.desc}\n\n#DevPersonality #GitHub`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-3 text-xs"
-              style={{
-                background: "#1d9bf0",
-                color: "#fff",
-                fontFamily: "var(--font-mono)",
-                boxShadow: "3px 3px 0px #000",
-                textDecoration: "none",
-              }}
-            >
-              X에 공유하기
-            </a>
+            <SaveImageButton
+              type={type}
+              label={meta.label}
+              color={meta.color}
+              hook={meta.hook}
+              desc={meta.desc}
+              long={meta.long}
+              username={username}
+            />
             <ShareUrlButton
               url={`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/result/${username}`}
             />
