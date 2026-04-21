@@ -286,6 +286,23 @@ GitHub 활동 패턴(커밋 빈도, 시간대, 언어 분포, 기여 규모)을 
 
 ## 5. 결과 출력 구조
 
+### 유형 궁합
+
+각 유형별 잘 맞는 유형 1개, 안 맞는 유형 1개를 결과 페이지에 표시한다.
+
+```ts
+const COMPATIBILITY: Record<string, { good: string; bad: string }> = {
+  gardener:   { good: "craftsman", bad: "sprinter" },   // 묵묵히 퀄리티 vs 리듬 불일치
+  sprinter:   { good: "hacker",    bad: "researcher" }, // 둘 다 먼저 돌진 vs 원리 파는 동안 배포
+  architect:  { good: "researcher", bad: "hacker" },    // 깊이 이해 후 행동 vs 다이어그램 없이 누름
+  hacker:     { good: "explorer",  bad: "craftsman" },  // 새 영역 탐험 vs 완벽주의 충돌
+  researcher: { good: "architect", bad: "builder" },    // 이해→설계→실행 vs 일단 배포
+  craftsman:  { good: "architect", bad: "hacker" },     // 구조+디테일 vs 코드 리뷰 전쟁
+  explorer:   { good: "hacker",    bad: "gardener" },   // 신기술 PoC 최강 vs 한 우물 충돌
+  builder:    { good: "sprinter",  bad: "architect" },  // 폭발적 생산성 vs 설계 끝날 때까지 대기
+};
+```
+
 ### 화면 구성
 
 ```
