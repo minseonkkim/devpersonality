@@ -263,20 +263,34 @@ export default async function ResultPage({
               url={`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/result/${username}`}
             />
           </div>
-          <Link
-            href="/"
-            className="text-xs"
-            style={{
-              color: "#484f58",
-              fontFamily: "var(--font-mono)",
-              textDecoration: "none",
-              borderBottom: "1px solid #484f58",
-              paddingBottom: "1px",
-              marginTop: "8px",
-            }}
-          >
-            ↩ 다시 분석하기
-          </Link>
+          <div style={{ display: "flex", gap: 16, marginTop: 8 }}>
+            <Link
+              href={`/badge/${username}`}
+              className="text-xs"
+              style={{
+                color: "#484f58",
+                fontFamily: "var(--font-mono)",
+                textDecoration: "none",
+                borderBottom: "1px solid #484f58",
+                paddingBottom: "1px",
+              }}
+            >
+              🔖 README 배지
+            </Link>
+            <Link
+              href="/"
+              className="text-xs"
+              style={{
+                color: "#484f58",
+                fontFamily: "var(--font-mono)",
+                textDecoration: "none",
+                borderBottom: "1px solid #484f58",
+                paddingBottom: "1px",
+              }}
+            >
+              ↩ 다시 분석하기
+            </Link>
+          </div>
         </div>
       </main>
 

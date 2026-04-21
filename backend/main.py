@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.api.router import router
+from app.api.badge_router import badge_router
 
 app = FastAPI(
     title="Dev Personality API",
@@ -20,3 +21,4 @@ app.add_middleware(
 )
 
 app.include_router(router, prefix="/api")
+app.include_router(badge_router)
