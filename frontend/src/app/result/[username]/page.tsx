@@ -3,6 +3,7 @@ import Link from "next/link";
 import LogoIcon from "@/components/LogoIcon";
 import { ShareUrlButton } from "@/components/ShareUrlButton";
 import { SaveImageButton } from "@/components/SaveImageButton";
+import { BadgeModal } from "@/components/BadgeModal";
 import { notFound } from "next/navigation";
 
 const COMPATIBILITY: Record<string, { good: string; goodReason: string; bad: string; badReason: string }> = {
@@ -53,6 +54,25 @@ export default async function ResultPage({
 
   const { type, avatar_url, axes } = data;
   const meta = TYPE_META[type];
+
+  const TYPE_META_BADGE: Record<string, { label: string; en: string; emoji: string }> = {
+    gardener:   { label: "꾸준형",  en: "Gardener",   emoji: "🌱" },
+    sprinter:   { label: "몰입형",  en: "Sprinter",   emoji: "⚡" },
+    architect:  { label: "설계형",  en: "Architect",  emoji: "🏗️" },
+    hacker:     { label: "실험형",  en: "Hacker",     emoji: "🔧" },
+    researcher: { label: "탐구형",  en: "Researcher", emoji: "🔬" },
+    craftsman:  { label: "장인형",  en: "Craftsman",  emoji: "🎯" },
+    explorer:   { label: "탐험형",  en: "Explorer",   emoji: "🧭" },
+    builder:    { label: "빌더형",  en: "Builder",    emoji: "🚀" },
+  };
+  const badgeMeta = TYPE_META_BADGE[type] ?? TYPE_META_BADGE["gardener"];
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const smallBadgeUrl = `${baseUrl}/api/badge/${username}`;
+  const cardBadgeUrl = `${baseUrl}/api/badge/${username}/card`;
+  const smallMarkdown = `![dev personality](${smallBadgeUrl})`;
+  const smallHtml = `<img src="${smallBadgeUrl}" alt="dev personality" />`;
+  const cardMarkdown = `[![dev personality](${cardBadgeUrl})](${baseUrl}/result/${username})`;
+  const cardHtml = `<a href="${baseUrl}/result/${username}"><img src="${cardBadgeUrl}" alt="dev personality card" /></a>`;
 
   return (
     <div className="flex flex-col min-h-screen" style={{ background: "#0d1117" }}>
@@ -264,19 +284,19 @@ export default async function ResultPage({
             />
           </div>
           <div style={{ display: "flex", gap: 16, marginTop: 8 }}>
-            <Link
-              href={`/badge/${username}`}
-              className="text-xs"
-              style={{
-                color: "#484f58",
-                fontFamily: "var(--font-mono)",
-                textDecoration: "none",
-                borderBottom: "1px solid #484f58",
-                paddingBottom: "1px",
-              }}
-            >
-              🔖 README 배지
-            </Link>
+            <BadgeModal
+              username={username}
+              smallBadgeUrl={smallBadgeUrl}
+              cardBadgeUrl={cardBadgeUrl}
+              smallMarkdown={smallMarkdown}
+              smallHtml={smallHtml}
+              cardMarkdown={cardMarkdown}
+              cardHtml={cardHtml}
+              typeColor={meta.color}
+              typeEmoji={badgeMeta.emoji}
+              typeLabel={badgeMeta.label}
+              typeEn={badgeMeta.en}
+            />
             <Link
               href="/"
               className="text-xs"
