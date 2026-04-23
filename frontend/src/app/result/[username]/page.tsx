@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatedSprite } from "@/components/AnimatedSprite";
-import LogoIcon from "@/components/LogoIcon";
 import { ShareUrlButton } from "@/components/ShareUrlButton";
 import { SaveImageButton } from "@/components/SaveImageButton";
 import { BadgeModal } from "@/components/BadgeModal";
 import { notFound } from "next/navigation";
-import BrandWordmark from "@/components/BrandWordmark";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
 
 const COMPATIBILITY: Record<string, { good: string; goodReason: string; bad: string; badReason: string }> = {
   gardener:   { good: "craftsman",  goodReason: "같이 리뷰하면 PR이 조용히 머지된다. 둘 다 급하지 않다.",        bad: "sprinter",   badReason: "한 명은 매일 조금씩, 한 명은 마감 전날 올인. PR 타이밍이 안 맞는다." },
@@ -78,18 +78,7 @@ export default async function ResultPage({
 
   return (
     <div className="flex flex-col min-h-screen" style={{ background: "#0d1117" }}>
-      <header
-        className="flex items-center justify-between px-6 py-4"
-        style={{ borderBottom: "1px solid #30363d" }}
-      >
-        <Link href="/" className="flex items-center gap-3" style={{ textDecoration: "none" }}>
-          <LogoIcon />
-          <BrandWordmark
-            className="text-xs"
-            style={{ fontFamily: "var(--font-press-start)", color: "#e6edf3" }}
-          />
-        </Link>
-      </header>
+      <SiteHeader />
 
       <main className="flex flex-col items-center flex-1 px-6 pt-14 pb-12 gap-8">
         <div className="text-xs" style={{ fontFamily: "var(--font-mono)", color: "#484f58" }}>
@@ -303,12 +292,7 @@ export default async function ResultPage({
         </div>
       </main>
 
-      <footer
-        className="flex items-center justify-center px-6 py-4 text-xs"
-        style={{ borderTop: "1px solid #30363d", fontFamily: "var(--font-mono)", color: "#484f58" }}
-      >
-        made with ♥ by dev8ersonality
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

@@ -1,6 +1,6 @@
-import LogoIcon from "@/components/LogoIcon";
 import { AnimatedSprite } from "@/components/AnimatedSprite";
-import BrandWordmark from "@/components/BrandWordmark";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
 
 const TYPES = [
   { id: "gardener",   label: "꾸준형", color: "#4CAF50", desc: "매일 물을 주듯 꾸준히" },
@@ -16,25 +16,7 @@ const TYPES = [
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen" style={{ background: "#0d1117" }}>
-      {/* Header */}
-      <header
-        className="flex items-center justify-between px-6 py-4"
-        style={{ borderBottom: "1px solid #30363d" }}
-      >
-        <div className="flex items-center gap-3">
-          <LogoIcon />
-          <BrandWordmark
-            className="text-xs"
-            style={{ fontFamily: "var(--font-press-start)", color: "#e6edf3" }}
-          />
-        </div>
-        <span
-          className="text-xs"
-          style={{ fontFamily: "var(--font-mono)", color: "#484f58" }}
-        >
-          v1.0
-        </span>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <main className="flex flex-col items-center flex-1 px-6 pt-16 pb-12 gap-8">
@@ -119,17 +101,7 @@ export default function LandingPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer
-        className="flex items-center justify-center px-6 py-4 text-xs"
-        style={{
-          borderTop: "1px solid #30363d",
-          fontFamily: "var(--font-mono)",
-          color: "#484f58",
-        }}
-      >
-        made with ♥ by dev8ersonality
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
