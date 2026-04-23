@@ -5,7 +5,7 @@ const TYPES = [
   { id: "gardener",   label: "꾸준형", color: "#4CAF50", desc: "매일 물을 주듯 꾸준히" },
   { id: "sprinter",   label: "몰입형", color: "#FF5722", desc: "한 번 달리면 멈추지 않아" },
   { id: "architect",  label: "설계형", color: "#3B5EDE", desc: "짓기 전에 먼저 그린다" },
-  { id: "hacker",     label: "실험형", color: "#00C853", desc: "일단 해보고 생각한다" },
+  { id: "hacker",     label: "실험형", color: "#FFC107", desc: "일단 해보고 생각한다" },
   { id: "researcher", label: "탐구형", color: "#009688", desc: "왜인지 알아야 직성이 풀려" },
   { id: "craftsman",  label: "장인형", color: "#FF8F00", desc: "디테일에 영혼을 건다" },
   { id: "explorer",   label: "탐험형", color: "#29B6F6", desc: "새로운 기술이 있다면 GO" },
