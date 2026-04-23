@@ -6,7 +6,7 @@ from app.api.router import router
 from app.api.badge_router import badge_router
 
 app = FastAPI(
-    title="Dev Personality API",
+    title="Dev 8ersonality API",
     version="0.1.0",
     docs_url="/docs" if settings.APP_ENV == "development" else None,
     redoc_url="/redoc" if settings.APP_ENV == "development" else None,

@@ -1,4 +1,4 @@
-# Dev Personality — 디자인 시스템
+# Dev 8ersonality — 디자인 시스템
 
 > 버전: v1.0 · 작성일: 2026-04-17  
 > 픽셀 아트 캐릭터를 중심으로 한 레트로-개발자 감성 UI
@@ -24,16 +24,16 @@
 
 > 픽셀 아트 캐릭터가 살아 숨쉬는 개발자 감성 UI
 
-GitHub의 어두운 분위기를 기반으로 하되, 레트로 게임의 픽셀 감성을 입힌 스타일. 
+GitHub의 어두운 분위기를 기반으로 하되, 레트로 게임의 픽셀 감성을 입힌 스타일.
 8비트 게임처럼 각 유형의 캐릭터가 결과 화면에서 살아있는 존재처럼 느껴지게 한다.
 
 ### 3가지 키워드
 
-| 키워드 | 의미 |
-|--------|------|
-| **Pixel** | 모든 UI 요소가 픽셀 캐릭터와 어울리는 방식으로 설계 |
-| **Terminal** | 개발자 친화적인 모노스페이스 느낌, 코드 에디터 감성 |
-| **Alive** | 캐릭터가 단순한 이미지가 아닌 결과의 "얼굴"처럼 느껴지도록 |
+| 키워드       | 의미                                                       |
+| ------------ | ---------------------------------------------------------- |
+| **Pixel**    | 모든 UI 요소가 픽셀 캐릭터와 어울리는 방식으로 설계        |
+| **Terminal** | 개발자 친화적인 모노스페이스 느낌, 코드 에디터 감성        |
+| **Alive**    | 캐릭터가 단순한 이미지가 아닌 결과의 "얼굴"처럼 느껴지도록 |
 
 ### 무드 레퍼런스
 
@@ -79,11 +79,11 @@ GitHub 링크   #58a6ff   GitHub 로그인 버튼, 링크
 
 ### 폰트 역할 분리
 
-| 역할 | 폰트 | 적용 위치 |
-|------|------|-----------|
-| **메인 타이틀** | `Press Start 2P` (Google Fonts) | h1 랜딩 타이틀, 결과 유형명 |
-| **UI 본문** | `Geist Sans` (기존 설정 유지) | 설명 · 버튼 · 라벨 |
-| **코드 · 수치** | `Geist Mono` | 점수 숫자, 지표 값, 배지 코드 |
+| 역할            | 폰트                            | 적용 위치                     |
+| --------------- | ------------------------------- | ----------------------------- |
+| **메인 타이틀** | `Press Start 2P` (Google Fonts) | h1 랜딩 타이틀, 결과 유형명   |
+| **UI 본문**     | `Geist Sans` (기존 설정 유지)   | 설명 · 버튼 · 라벨            |
+| **코드 · 수치** | `Geist Mono`                    | 점수 숫자, 지표 값, 배지 코드 |
 
 > `Press Start 2P`는 픽셀 아트와 직접 연결되는 폰트. 제목과 유형명에만 제한적으로 사용해 레트로 포인트를 준다. 본문에 쓰면 가독성이 떨어지므로 금지.
 
@@ -117,26 +117,28 @@ style={{ imageRendering: 'pixelated' }}
 
 ### 스프라이트 사이즈 가이드
 
-| 사용 위치 | 표시 크기 |
-|-----------|-----------|
-| 랜딩 유형 카드 미리보기 | 64 × 64 px |
-| 결과 페이지 메인 | 192 × 192 px |
-| OG / SNS 이미지 | 256 × 256 px |
-| 배지 (SVG 내) | 32 × 32 px |
+| 사용 위치               | 표시 크기    |
+| ----------------------- | ------------ |
+| 랜딩 유형 카드 미리보기 | 64 × 64 px   |
+| 결과 페이지 메인        | 192 × 192 px |
+| OG / SNS 이미지         | 256 × 256 px |
+| 배지 (SVG 내)           | 32 × 32 px   |
 
 ### 픽셀 아트 테마 UI 요소
 
 스프라이트와 어울리는 UI를 만들기 위해 아래 요소를 활용한다.
 
 **픽셀 보더**: 기본 `rounded` 대신 **sharp corners** + 내부 그림자
+
 ```css
 /* 픽셀 느낌의 박스 */
 border: 2px solid #30363d;
 box-shadow: 2px 2px 0px #000;
-border-radius: 0;  /* 둥근 모서리 금지 */
+border-radius: 0; /* 둥근 모서리 금지 */
 ```
 
 **픽셀 버튼 효과**:
+
 ```css
 /* 클릭 시 픽셀 눌림 효과 */
 active:translate-y-0.5 active:shadow-none
@@ -148,34 +150,34 @@ active:translate-y-0.5 active:shadow-none
 
 각 유형의 대표 색상은 스프라이트 의상 색상에서 추출했다.
 
-| ID | 유형명 | 대표 색상 | Hex | 스프라이트 의상 |
-|----|--------|-----------|-----|----------------|
-| `gardener` | 꾸준형 | 초록 | `#4CAF50` | 초록 후드, 물뿌리개 |
-| `sprinter` | 몰입형 | 빨강-주황 | `#FF5722` | 빨간 수트, 불꽃 |
-| `architect` | 설계형 | 인디고 | `#3B5EDE` | 파란 수트, 청사진 |
-| `hacker` | 실험형 | 라임 그린 | `#00C853` | 검정 후드, 터미널 |
-| `researcher` | 탐구형 | 틸 | `#009688` | 청록 재킷, 책 |
-| `craftsman` | 장인형 | 앰버 | `#FF8F00` | 갈색 외투, 클래퍼보드 |
-| `explorer` | 탐험형 | 스카이 블루 | `#29B6F6` | 하늘색 수트, 배낭 |
-| `builder` | 빌더형 | 딥 오렌지 | `#E53935` | 빨간 수트, 드럼통 |
+| ID           | 유형명 | 대표 색상   | Hex       | 스프라이트 의상       |
+| ------------ | ------ | ----------- | --------- | --------------------- |
+| `gardener`   | 꾸준형 | 초록        | `#4CAF50` | 초록 후드, 물뿌리개   |
+| `sprinter`   | 몰입형 | 빨강-주황   | `#FF5722` | 빨간 수트, 불꽃       |
+| `architect`  | 설계형 | 인디고      | `#3B5EDE` | 파란 수트, 청사진     |
+| `hacker`     | 실험형 | 라임 그린   | `#00C853` | 검정 후드, 터미널     |
+| `researcher` | 탐구형 | 틸          | `#009688` | 청록 재킷, 책         |
+| `craftsman`  | 장인형 | 앰버        | `#FF8F00` | 갈색 외투, 클래퍼보드 |
+| `explorer`   | 탐험형 | 스카이 블루 | `#29B6F6` | 하늘색 수트, 배낭     |
+| `builder`    | 빌더형 | 딥 오렌지   | `#E53935` | 빨간 수트, 드럼통     |
 
 ### 유형 색상 사용 방법
 
 ```tsx
 // 유형 ID → 색상 매핑
 const TYPE_COLORS: Record<string, string> = {
-  gardener:   '#4CAF50',
-  sprinter:   '#FF5722',
-  architect:  '#3B5EDE',
-  hacker:     '#00C853',
-  researcher: '#009688',
-  craftsman:  '#FF8F00',
-  explorer:   '#29B6F6',
-  builder:    '#E53935',
+  gardener: "#4CAF50",
+  sprinter: "#FF5722",
+  architect: "#3B5EDE",
+  hacker: "#00C853",
+  researcher: "#009688",
+  craftsman: "#FF8F00",
+  explorer: "#29B6F6",
+  builder: "#E53935",
 };
 
 // 결과 카드 글로우 효과
-boxShadow: `0 0 24px ${TYPE_COLORS[typeId]}40`  // 25% opacity
+boxShadow: `0 0 24px ${TYPE_COLORS[typeId]}40`; // 25% opacity
 ```
 
 ---
@@ -193,6 +195,7 @@ boxShadow: `0 0 24px ${TYPE_COLORS[typeId]}40`  // 25% opacity
 ```
 
 결과 카드는 유형 대표 색상으로 테두리 + 글로우:
+
 ```
 border-color : TYPE_COLOR
 box-shadow   : 4px 4px 0px #000, 0 0 24px TYPE_COLOR + "33"
@@ -201,6 +204,7 @@ box-shadow   : 4px 4px 0px #000, 0 0 24px TYPE_COLOR + "33"
 ### 버튼
 
 **Primary (GitHub 로그인)**
+
 ```
 배경      : #ffffff
 텍스트    : #0d1117
@@ -212,6 +216,7 @@ active    : translate-y 1px, shadow none  ← 픽셀 눌림
 ```
 
 **Secondary**
+
 ```
 배경      : transparent
 텍스트    : #e6edf3
@@ -221,6 +226,7 @@ hover     : border-color #58a6ff
 ```
 
 **Type Accent (유형별 CTA)**
+
 ```
 배경      : TYPE_COLOR
 텍스트    : #0d1117 (어두운 텍스트)
@@ -250,6 +256,7 @@ hover     : border-color #58a6ff
 ```
 
 픽셀 스타일 세그먼트 바 옵션:
+
 ```
 블록 단위로 채워지는 진행 바 (8px 블록 + 1px gap)
 ```
@@ -286,7 +293,7 @@ hover     : border-color #58a6ff
 
 ```
 ┌─────────────────────────────────────┐
-│  Header: "Dev Personality"  로고     │  배경: #0d1117
+│  Header: "Dev 8ersonality"  로고     │  배경: #0d1117
 ├─────────────────────────────────────┤
 │                                     │
 │    [픽셀 타이틀 - Press Start 2P]    │
@@ -353,14 +360,14 @@ hover     : border-color #58a6ff
 
 ### 주요 모션
 
-| 요소 | 모션 | 구현 |
-|------|------|------|
-| 결과 카드 진입 | 아래에서 올라오며 등장 | `translateY(16px) → 0`, 300ms ease-out |
-| 스프라이트 등장 | 위에서 바운스 | `translateY(-8px) → 0`, steps(4), 200ms |
-| 스프라이트 아이들 | 위아래 플로팅 | `translateY(0) ↔ translateY(-6px)`, 2s ease-in-out infinite (`animate-float`) |
-| 버튼 클릭 | 픽셀 눌림 | `translateY(0) → translateY(2px)`, 즉시 |
-| 점수 바 채움 | 블록 단위 채워짐 | `width: 0 → N%`, steps(8), 800ms delay |
-| 타이핑 텍스트 | 커서 깜빡이며 한 글자씩 | CSS animation, steps(1) |
+| 요소              | 모션                    | 구현                                                                          |
+| ----------------- | ----------------------- | ----------------------------------------------------------------------------- |
+| 결과 카드 진입    | 아래에서 올라오며 등장  | `translateY(16px) → 0`, 300ms ease-out                                        |
+| 스프라이트 등장   | 위에서 바운스           | `translateY(-8px) → 0`, steps(4), 200ms                                       |
+| 스프라이트 아이들 | 위아래 플로팅           | `translateY(0) ↔ translateY(-6px)`, 2s ease-in-out infinite (`animate-float`) |
+| 버튼 클릭         | 픽셀 눌림               | `translateY(0) → translateY(2px)`, 즉시                                       |
+| 점수 바 채움      | 블록 단위 채워짐        | `width: 0 → N%`, steps(8), 800ms delay                                        |
+| 타이핑 텍스트     | 커서 깜빡이며 한 글자씩 | CSS animation, steps(1)                                                       |
 
 ### 호버 효과
 
@@ -368,7 +375,7 @@ hover     : border-color #58a6ff
 /* 유형 카드 hover */
 .type-card:hover {
   border-color: TYPE_COLOR;
-  box-shadow: 4px 4px 0px TYPE_COLOR;  /* 컬러 그림자로 변경 */
+  box-shadow: 4px 4px 0px TYPE_COLOR; /* 컬러 그림자로 변경 */
   transform: translate(-2px, -2px);
 }
 ```
@@ -381,19 +388,19 @@ hover     : border-color #58a6ff
 
 ```tsx
 // 픽셀 카드
-"bg-[#161b22] border-2 border-[#30363d] p-6"
+"bg-[#161b22] border-2 border-[#30363d] p-6";
 // + style={{ boxShadow: '4px 4px 0px #000' }}
 
 // 픽셀 버튼 (Primary)
-"bg-white text-[#0d1117] font-bold px-6 py-3 border-0"
+"bg-white text-[#0d1117] font-bold px-6 py-3 border-0";
 // + style={{ boxShadow: '4px 4px 0px #8b949e' }}
 
 // 유형 배지
-"font-mono text-xs uppercase tracking-wider px-2 py-0.5"
+"font-mono text-xs uppercase tracking-wider px-2 py-0.5";
 // + 인라인 style로 TYPE_COLOR 적용
 
 // 스프라이트 이미지
-"block"
+"block";
 // + style={{ imageRendering: 'pixelated', width: 192, height: 192 }}
 ```
 

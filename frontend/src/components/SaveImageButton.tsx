@@ -86,7 +86,7 @@ export function SaveImageButton({ type, label, color, hook, desc, long, username
       ctx.font = '900 24px "Press Start 2P", monospace';
       ctx.fillStyle = "#e6edf3";
       ctx.textAlign = "center";
-      ctx.fillText("Dev Personality", W / 2, 104);
+      ctx.fillText("Dev 8ersonality", W / 2, 104);
 
       ctx.font = '24px "Courier New", monospace';
       ctx.fillStyle = "#484f58";
@@ -172,7 +172,7 @@ export function SaveImageButton({ type, label, color, hook, desc, long, username
 
       ctx.font = '18px "Press Start 2P", monospace';
       ctx.fillStyle = "#30363d";
-      ctx.fillText("devpersonality", W / 2, 1884);
+      ctx.fillText("dev8ersonality", W / 2, 1884);
 
       canvas.toBlob(
         (blob) => {
@@ -180,7 +180,7 @@ export function SaveImageButton({ type, label, color, hook, desc, long, username
           const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = `${username}-dev-personality.png`;
+          a.download = `${username}-dev-8ersonality.png`;
           a.click();
           URL.revokeObjectURL(url);
         },

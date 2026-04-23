@@ -32,7 +32,7 @@ def _build_svg(type_slug: str, username: str) -> str:
     meta = TYPE_META.get(type_slug, TYPE_META["gardener"])
     color = meta["color"]
     dark = _darken(color)
-    label = "dev personality"
+    label = "dev 8ersonality"
     value = f"{meta['emoji']} {meta['label']} | {meta['en']}"
 
     label_w = 110

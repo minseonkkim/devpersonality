@@ -1,4 +1,4 @@
-# Dev Personality — 실행 매뉴얼
+# Dev 8ersonality — 실행 매뉴얼
 
 > 요구 환경: Python 3.10+, Node.js 20+
 
@@ -7,8 +7,8 @@
 ## 1. 저장소 클론
 
 ```bash
-git clone https://github.com/<your-id>/devpersonality.git
-cd devpersonality
+git clone https://github.com/<your-id>/dev8ersonality.git
+cd dev8ersonality
 ```
 
 ---
@@ -18,10 +18,10 @@ cd devpersonality
 1. GitHub → Settings → Developer settings → OAuth Apps → **New OAuth App**
 2. 아래 값으로 등록:
 
-| 항목 | 값 |
-|---|---|
-| Application name | Dev Personality (local) |
-| Homepage URL | `http://localhost:3000` |
+| 항목                       | 값                                               |
+| -------------------------- | ------------------------------------------------ |
+| Application name           | Dev 8ersonality (local)                          |
+| Homepage URL               | `http://localhost:3000`                          |
 | Authorization callback URL | `http://localhost:3000/api/auth/github/callback` |
 
 3. 생성 후 **Client ID** 와 **Client Secret** 을 복사해둔다.
@@ -103,9 +103,9 @@ npm run dev
 
 ## 7. 자주 발생하는 문제
 
-| 증상 | 원인 | 해결 |
-|---|---|---|
-| `GITHUB_CLIENT_ID` 오류 | env 파일 누락 | 3단계 환경 변수 확인 |
-| CORS 오류 | `ALLOWED_ORIGINS` 불일치 | backend/.env의 포트 번호 확인 |
-| OAuth callback 실패 | GitHub App callback URL 불일치 | GitHub OAuth App 설정에서 callback URL 재확인 |
-| 백엔드 연결 안됨 | 백엔드 미실행 | 4단계 서버 실행 여부 확인 |
+| 증상                    | 원인                           | 해결                                          |
+| ----------------------- | ------------------------------ | --------------------------------------------- |
+| `GITHUB_CLIENT_ID` 오류 | env 파일 누락                  | 3단계 환경 변수 확인                          |
+| CORS 오류               | `ALLOWED_ORIGINS` 불일치       | backend/.env의 포트 번호 확인                 |
+| OAuth callback 실패     | GitHub App callback URL 불일치 | GitHub OAuth App 설정에서 callback URL 재확인 |
+| 백엔드 연결 안됨        | 백엔드 미실행                  | 4단계 서버 실행 여부 확인                     |

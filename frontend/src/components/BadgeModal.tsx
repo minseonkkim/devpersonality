@@ -135,7 +135,7 @@ export function BadgeModal(props: Props) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={props.smallBadgeUrl}
-                alt={`dev personality: ${props.typeEmoji} ${props.typeLabel} | ${props.typeEn}`}
+                alt={`dev 8ersonality: ${props.typeEmoji} ${props.typeLabel} | ${props.typeEn}`}
                 style={{ display: "block" }}
               />
             </section>
@@ -169,7 +169,7 @@ export function BadgeModal(props: Props) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={props.cardBadgeUrl}
-                alt={`dev personality card: ${props.typeLabel}`}
+                alt={`dev 8ersonality card: ${props.typeLabel}`}
                 style={{ display: "block", maxWidth: "100%", height: "auto" }}
               />
             </section>

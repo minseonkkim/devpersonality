@@ -56,11 +56,11 @@ export default async function BadgePage({
   const smallBadgeUrl = `${baseUrl}/api/badge/${username}`;
   const cardBadgeUrl = `${baseUrl}/api/badge/${username}/card`;
 
-  const smallMarkdown = `![dev personality](${smallBadgeUrl})`;
-  const smallHtml = `<img src="${smallBadgeUrl}" alt="dev personality" />`;
+  const smallMarkdown = `![dev 8ersonality](${smallBadgeUrl})`;
+  const smallHtml = `<img src="${smallBadgeUrl}" alt="dev 8ersonality" />`;
 
-  const cardMarkdown = `[![dev personality](${cardBadgeUrl})](${baseUrl}/result/${username})`;
-  const cardHtml = `<a href="${baseUrl}/result/${username}"><img src="${cardBadgeUrl}" alt="dev personality card" /></a>`;
+  const cardMarkdown = `[![dev 8ersonality](${cardBadgeUrl})](${baseUrl}/result/${username})`;
+  const cardHtml = `<a href="${baseUrl}/result/${username}"><img src="${cardBadgeUrl}" alt="dev 8ersonality card" /></a>`;
 
   return (
     <main
@@ -94,7 +94,7 @@ export default async function BadgePage({
         >
           <LogoIcon />
           <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 11 }}>
-            Dev Personality
+            Dev 8ersonality
           </span>
         </Link>
         <Link
@@ -151,7 +151,7 @@ export default async function BadgePage({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={smallBadgeUrl}
-            alt={`dev personality: ${meta.emoji} ${meta.label} | ${meta.en}`}
+            alt={`dev 8ersonality: ${meta.emoji} ${meta.label} | ${meta.en}`}
             style={{ display: "block" }}
           />
         </section>
@@ -184,7 +184,7 @@ export default async function BadgePage({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={cardBadgeUrl}
-            alt={`dev personality card: ${meta.label}`}
+            alt={`dev 8ersonality card: ${meta.label}`}
             style={{ display: "block", maxWidth: "100%", height: "auto" }}
           />
         </section>

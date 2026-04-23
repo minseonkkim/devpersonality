@@ -19,11 +19,11 @@ const pressStart2P = Press_Start_2P({
 });
 
 export const metadata: Metadata = {
-  title: "Dev Personality — 당신의 코딩 스타일은?",
+  title: "Dev 8ersonality — 당신의 코딩 스타일은?",
   description: "GitHub 활동을 분석해 당신의 개발자 유형을 알아보세요.",
   icons: { icon: "/favicon.svg" },
   openGraph: {
-    title: "Dev Personality — 당신의 코딩 스타일은?",
+    title: "Dev 8ersonality — 당신의 코딩 스타일은?",
     description: "GitHub 활동을 분석해 당신의 개발자 유형을 알아보세요.",
     images: [{ url: "/og_img.png", width: 1200, height: 630 }],
   },

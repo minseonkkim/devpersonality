@@ -1,5 +1,6 @@
 import LogoIcon from "@/components/LogoIcon";
 import { AnimatedSprite } from "@/components/AnimatedSprite";
+import BrandWordmark from "@/components/BrandWordmark";
 
 const TYPES = [
   { id: "gardener",   label: "꾸준형", color: "#4CAF50", desc: "매일 물을 주듯 꾸준히" },
@@ -22,12 +23,10 @@ export default function LandingPage() {
       >
         <div className="flex items-center gap-3">
           <LogoIcon />
-          <span
+          <BrandWordmark
             className="text-xs"
             style={{ fontFamily: "var(--font-press-start)", color: "#e6edf3" }}
-          >
-            Dev Personality
-          </span>
+          />
         </div>
         <span
           className="text-xs"
@@ -129,7 +128,7 @@ export default function LandingPage() {
           color: "#484f58",
         }}
       >
-        made with ♥ by devpersonality
+        made with ♥ by dev8ersonality
       </footer>
     </div>
   );

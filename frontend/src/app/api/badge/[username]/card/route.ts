@@ -87,8 +87,8 @@ function buildCardSvg(username: string, typeSlug: string): string {
     </g>`
     : `<text x="${cx}" y="${cy + 20}" text-anchor="middle" font-size="48">${meta.emoji}</text>`;
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" role="img" aria-label="dev personality: ${meta.label} ${meta.en}">
-  <title>dev personality: ${meta.label} ${meta.en}</title>
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" role="img" aria-label="dev 8ersonality: ${meta.label} ${meta.en}">
+  <title>dev 8ersonality: ${meta.label} ${meta.en}</title>
   <defs>
     <clipPath id="c">
       <rect width="${W}" height="${H}" rx="8"/>
@@ -122,7 +122,7 @@ function buildCardSvg(username: string, typeSlug: string): string {
     <text x="${textX}" y="79" font-family="Courier New, monospace" font-size="11" fill="#8b949e">${meta.emoji} ${meta.desc}</text>
 
     <line x1="${textX}" y1="93" x2="${W - 16}" y2="93" stroke="#30363d" stroke-width="0.5"/>
-    <text x="${textX}" y="110" font-family="Courier New, monospace" font-size="9" fill="${c}99" letter-spacing="0.5">&#x25b8; devpersonality.app</text>
+    <text x="${textX}" y="110" font-family="Courier New, monospace" font-size="9" fill="${c}99" letter-spacing="0.5">&#x25b8; dev8ersonality.app</text>
 
     <rect x="0" y="0" width="${W}" height="1" fill="${c}44"/>
     <rect x="${W - 1}" y="0" width="1" height="${H}" fill="${c}22"/>

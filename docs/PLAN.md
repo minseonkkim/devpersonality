@@ -1,4 +1,4 @@
-# Dev Personality — 서비스 기획서
+# Dev 8ersonality — 서비스 기획서
 
 > GitHub 활동 데이터를 규칙 기반 스코어링으로 분석해 개발자의 코딩 성향 유형을 알려주는 서비스  
 > 버전: v1.0 · 작성일: 2026-04-17
@@ -24,7 +24,7 @@
 
 | 항목      | 내용                           |
 | --------- | ------------------------------ |
-| 서비스명  | Dev Personality                |
+| 서비스명  | Dev 8ersonality                |
 | 부제      | GitHub 기반 개발자 성향 분석기 |
 | 타겟      | 개발자 전반                    |
 | 형태      | 웹 + GitHub OAuth 연동         |
@@ -324,7 +324,7 @@ const COMPATIBILITY: Record<string, { good: string; bad: string }> = {
 ### README 배지
 
 ```markdown
-![dev personality](https://dev-personality.com/badge/username)
+![dev 8ersonality](https://dev-8ersonality.com/badge/username)
 ```
 
 출력 예시: `꾸준형 🌱 | Gardener`
