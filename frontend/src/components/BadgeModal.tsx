@@ -31,20 +31,18 @@ export function BadgeModal(props: Props) {
     <>
       <button
         onClick={() => setOpen(true)}
+        className="px-5 py-3 text-xs"
         style={{
-          background: "transparent",
+          background: props.typeColor,
           border: "none",
-          padding: 0,
           cursor: "pointer",
-          color: "#484f58",
+          color: "#fff",
           fontFamily: "var(--font-mono)",
-          fontSize: "0.75rem",
-          textDecoration: "underline",
-          textUnderlineOffset: "3px",
-          textDecorationColor: "#484f58",
+          boxShadow: "3px 3px 0px #000",
+          transition: "background 0.15s",
         }}
       >
-        🔖 README 배지
+        README 배지
       </button>
 
       {open && (

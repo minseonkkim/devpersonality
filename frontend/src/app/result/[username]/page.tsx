@@ -256,7 +256,7 @@ export default async function ResultPage({
         })()}
 
         <div className="flex flex-col items-center gap-3">
-          <div className="flex gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             <SaveImageButton
               type={type}
               label={meta.label}
@@ -266,11 +266,6 @@ export default async function ResultPage({
               long={meta.long}
               username={username}
             />
-            <ShareUrlButton
-              url={`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/result/${username}`}
-            />
-          </div>
-          <div style={{ display: "flex", gap: 16, marginTop: 8 }}>
             <BadgeModal
               username={username}
               smallBadgeUrl={smallBadgeUrl}
@@ -284,6 +279,11 @@ export default async function ResultPage({
               typeLabel={badgeMeta.label}
               typeEn={badgeMeta.en}
             />
+            <ShareUrlButton
+              url={`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/result/${username}`}
+            />
+          </div>
+          <div style={{ display: "flex", gap: 16, marginTop: 8 }}>
             <Link
               href="/"
               className="text-xs"
