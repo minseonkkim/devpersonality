@@ -11,7 +11,7 @@ export default function LogoIcon() {
       <rect x="0" y="0" width="5" height="10" fill="#4CAF50" />
       <rect x="5" y="0" width="5" height="10" fill="#FF5722" />
       <rect x="10" y="0" width="5" height="10" fill="#3B5EDE" />
-      <rect x="15" y="0" width="5" height="10" fill="#00C853" />
+      <rect x="15" y="0" width="5" height="10" fill="#FFC107" />
       <rect x="0" y="10" width="5" height="10" fill="#009688" />
       <rect x="5" y="10" width="5" height="10" fill="#FF8F00" />
       <rect x="10" y="10" width="5" height="10" fill="#29B6F6" />
