@@ -15,7 +15,7 @@ const TYPE_META: Record<string, { label: string; en: string; emoji: string; colo
 
 function loadSpriteBase64(slug: string): string | null {
   try {
-    const filePath = path.join(process.cwd(), "public", "sprites", `${slug}.png`);
+    const filePath = path.join(process.cwd(), "public", "sprites", `${slug}1.png`);
     const buf = fs.readFileSync(filePath);
     return `data:image/png;base64,${buf.toString("base64")}`;
   } catch {

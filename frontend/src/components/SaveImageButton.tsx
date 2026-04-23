@@ -67,7 +67,7 @@ export function SaveImageButton({ type, label, color, hook, desc, long, username
       canvas.height = H;
       const ctx = canvas.getContext("2d")!;
 
-      const sprite = await loadSprite(`/sprites/${type}.png`);
+      const sprite = await loadSprite(`/sprites/${type}1.png`);
 
       // ── background ──────────────────────────────────────────
       ctx.fillStyle = "#0d1117";

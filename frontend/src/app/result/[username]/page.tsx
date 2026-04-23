@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AnimatedSprite } from "@/components/AnimatedSprite";
 import LogoIcon from "@/components/LogoIcon";
 import { ShareUrlButton } from "@/components/ShareUrlButton";
 import { SaveImageButton } from "@/components/SaveImageButton";
@@ -117,14 +118,7 @@ export default async function ResultPage({
             boxShadow: `6px 6px 0px ${meta.color}4d`,
           }}
         >
-          <Image
-            src={`/sprites/${type}.png`}
-            alt={meta.label}
-            width={96}
-            height={96}
-            style={{ imageRendering: "pixelated" }}
-            unoptimized
-          />
+          <AnimatedSprite type={type} width={96} height={96} />
           <span
             className="uppercase tracking-wider px-3 py-1 text-sm"
             style={{
@@ -242,14 +236,7 @@ export default async function ResultPage({
                       borderBottom: i === 0 ? "1px solid #21262d" : "none",
                     }}
                   >
-                    <Image
-                      src={`/sprites/${key}.png`}
-                      alt={typeMeta.label}
-                      width={48}
-                      height={48}
-                      style={{ imageRendering: "pixelated", flexShrink: 0 }}
-                      unoptimized
-                    />
+                    <AnimatedSprite type={key} width={48} height={48} style={{ flexShrink: 0 }} />
                     <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: 0 }}>
                       <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#484f58" }}>
                         <span style={{ color: signColor }}>{sign}</span> {label}

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import LogoIcon from "@/components/LogoIcon";
+import { AnimatedSprite } from "@/components/AnimatedSprite";
 
 const TYPES = [
   { id: "gardener",   label: "꾸준형", color: "#4CAF50", desc: "매일 물을 주듯 꾸준히" },
@@ -150,14 +150,7 @@ function TypeCard({ type }: { type: (typeof TYPES)[number] }) {
         "--type-color": type.color,
       } as React.CSSProperties}
     >
-      <Image
-        src={`/sprites/${type.id}.png`}
-        alt={type.label}
-        width={64}
-        height={64}
-        style={{ imageRendering: "pixelated" }}
-        unoptimized
-      />
+      <AnimatedSprite type={type.id} width={64} height={64} />
       <span
         className="uppercase tracking-wider px-2 py-0.5"
         style={{
