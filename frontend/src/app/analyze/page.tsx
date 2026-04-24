@@ -15,22 +15,37 @@ const STEPS = [
 function AnalyzeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const jobId = searchParams.get("job_id");
+  const code = searchParams.get("code");
+  const jobIdParam = searchParams.get("job_id");
 
   const [step, setStep] = useState(STEPS[0].label);
   const [percent, setPercent] = useState(0);
   const [failed, setFailed] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const jobIdRef = useRef<string | null>(jobIdParam);
 
   useEffect(() => {
-    if (!jobId) {
+    if (!code && !jobIdParam) {
       router.replace("/?error=missing_job");
       return;
     }
 
-    intervalRef.current = setInterval(async () => {
+    async function startJob() {
+      const res = await fetch("/api/analyze/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code }),
+      });
+      if (!res.ok) throw new Error("start failed");
+      const { job_id } = await res.json();
+      jobIdRef.current = job_id;
+    }
+
+    async function poll() {
+      const jid = jobIdRef.current;
+      if (!jid) return;
       try {
-        const res = await fetch(`/api/analyze/status/${jobId}`);
+        const res = await fetch(`/api/analyze/status/${jid}`);
         if (!res.ok) throw new Error("fetch failed");
         const data = await res.json();
 
@@ -51,12 +66,24 @@ function AnalyzeContent() {
         clearInterval(intervalRef.current!);
         setFailed(true);
       }
-    }, 1000);
+    }
+
+    async function init() {
+      try {
+        if (code) await startJob();
+        poll();
+        intervalRef.current = setInterval(poll, 1000);
+      } catch {
+        setFailed(true);
+      }
+    }
+
+    init();
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [jobId, router]);
+  }, [code, jobIdParam, router]);
 
   const blocks = Math.round((percent / 100) * 20);
 
@@ -127,9 +154,43 @@ function AnalyzeContent() {
   );
 }
 
+function AnalyzeFallback() {
+  return (
+    <div
+      className="flex flex-col min-h-screen items-center justify-center gap-8 px-6"
+      style={{ background: "#0d1117" }}
+    >
+      <LogoIcon />
+      <div className="flex flex-col items-center gap-6 w-full max-w-xs">
+        <p
+          className="text-xs text-center"
+          style={{ fontFamily: "var(--font-mono)", color: "#8b949e", minHeight: "1.5rem" }}
+        >
+          GitHub 인증 중...
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(20, 1fr)",
+            gap: "3px",
+            width: "100%",
+          }}
+        >
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div key={i} style={{ height: "12px", background: "#21262d" }} />
+          ))}
+        </div>
+        <p className="text-xs" style={{ fontFamily: "var(--font-mono)", color: "#484f58" }}>
+          0%
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function AnalyzePage() {
   return (
-    <Suspense>
+    <Suspense fallback={<AnalyzeFallback />}>
       <AnalyzeContent />
     </Suspense>
   );
