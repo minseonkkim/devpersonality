@@ -4,6 +4,7 @@ import { AnimatedSprite } from "@/components/AnimatedSprite";
 import { ShareUrlButton } from "@/components/ShareUrlButton";
 import { SaveImageButton } from "@/components/SaveImageButton";
 import { BadgeModal } from "@/components/BadgeModal";
+import { AllTypesModal } from "@/components/AllTypesModal";
 import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
@@ -270,6 +271,7 @@ export default async function ResultPage({
               typeLabel={badgeMeta.label}
               typeEn={badgeMeta.en}
             />
+            <AllTypesModal currentType={type} typeColor={meta.color} />
             <ShareUrlButton
               url={`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/result/${username}`}
             />
